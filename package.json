@@ -1,0 +1,31 @@
+{
+  "name": "barnowl-test",
+  "homepage": "http://reelyactive.com",
+  "author": {
+    "name": "reelyActive",
+    "email": "webdev@reelyactive.com"
+  },
+  "description": "The easiest way to get started with reelyActive's barnowl middleware package",
+  "main": "barnowl-test.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reelyactive/barnowl-test.git"
+  },
+  "version": "0.0.0",
+  "dependencies": {
+    "barnowl": ">=0.3.0",
+    "node-json2html": ">=0.4.0"
+  },
+  "keywords": [
+    "barnowl",
+    "reelyActive",
+    "RFID",
+    "Bluetooth Smart",
+    "BLE"
+  ],
+  "contributors": [
+    { "name": "Jeffrey Dungen" },
+    { "name": "Vaughn DiMarco" }
+  ],
+  "license": "MIT"
+}
