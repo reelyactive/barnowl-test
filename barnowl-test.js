@@ -66,7 +66,7 @@ server.on('request', function(req, res) {
     var tiraid = identifierTable[identifier];
     var id = json2html.transform(tiraid, transformIdentifier);
     var time = json2html.transform(tiraid, transformTime);
-    var rssi = json2html.transform(tiraid.radioDecodings.shift(), transformRSSI);
+    var rssi = json2html.transform(tiraid.radioDecodings[0], transformRSSI);
     var row = id + time + rssi;
     html += '<tr>' + row + '</tr>';
   }
@@ -81,10 +81,10 @@ server.listen(80);
 /* Hardware Configuration  (Have hardware? Configure and have fun!)         */
 /*                                                                          */
 /* UDP:    Specify the IP address and port on THIS machine to which the     */
-/*         hardware is sending packets. ex: 192.168.1.1:50000               */
+/*         hardware is sending packets. ex: 192.168.1.101:50000             */
 /* SERIAL: Specify the path to the serial device on THIS machine which is   */
 /*         receiving packets. ex: /dev/ttyUSB0 (typical on Linux)           */
 /****************************************************************************/
-//barnOwlInstance.bind('udp', '192.168.1.1:50000');
+//barnOwlInstance.bind('udp', '192.168.1.101:50000');
 //barnOwlInstance.bind('serial', '/dev/ttyUSB0');
 /****************************************************************************/
