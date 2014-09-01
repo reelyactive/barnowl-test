@@ -24,9 +24,33 @@ If you're unfamiliar with the first step, simply copy barnowl-test.js and packag
 Is it working?
 --------------
 
-Do you see lines being output to the console?  Good!
-Point your browser to http://127.0.0.1 - does it display a table?  Good!
-What you're seeing are simulated wireless device transmissions that include an identifier, a timestamp and a signal strength (RSSI).
+Do you see lines like the following being output to the console?  _Good!_
+
+    {
+     "identifier": {
+      "type": "EUI-64",
+      "value": "001bc5094b00b1e5",
+      "flags": {
+       "transmissionCount": 0
+      }
+     },
+     "timestamp": "2014-09-01T01:23:45.678Z",
+     "radioDecodings": [
+      {
+       "rssi": 128,
+       "identifier": {
+        "type": "EUI-64",
+        "value": "001bc50940800000"
+       }
+      }
+     ]
+    }
+
+Point your browser to http://127.0.0.1 - does it display a table like this?  _Good!_
+
+![screenshot](http://reelyactive.com/images/barnowl-test-screenshot.png)
+
+What you're seeing are simulated wireless device transmissions that include an identifier, a timestamp, the strongest signal strength (RSSI) and the identifier of the decoding device.
 
 Moving beyond the default
 -------------------------
