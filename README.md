@@ -17,7 +17,7 @@ Install and run
     > $ git clone https://github.com/reelyactive/barnowl-test.git barnowl-test
     > $ cd barnowl-test
     > $ npm install
-    > $ sudo node barnowl-test
+    > $ node barnowl-test
 
 If you're unfamiliar with the first step, simply copy barnowl-test.js and package.json to a local folder and then complete the remaining steps.
 
@@ -46,7 +46,7 @@ Do you see lines like the following being output to the console?  _Good!_
      ]
     }
 
-Point your browser to http://127.0.0.1 - does it display a table like this?  _Good!_
+Point your browser to http://127.0.0.1:3000 - does it display a table like this?  _Good!_
 
 ![screenshot](http://reelyactive.com/images/barnowl-test-screenshot.png)
 

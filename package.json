@@ -11,9 +11,9 @@
     "type": "git",
     "url": "https://github.com/reelyactive/barnowl-test.git"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependencies": {
-    "barnowl": ">=0.3.0",
+    "barnowl": ">=0.4.1",
     "node-json2html": ">=0.4.0",
     "nedb": ">=0.11.0"
   },

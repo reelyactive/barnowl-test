@@ -8,18 +8,21 @@ var nedb = require('nedb');
 /****************************************************************************/
 /* Configuration  (this is the only section you might want to tweak)        */
 /*                                                                          */
-/* HOST:     IP address on which to host the webpage and receive packets    */
-/*           127.0.0.1 means you can visit the webpage at http://localhost  */
-/* PORT:     Port on which to send/receive packets                          */
-/*           50000 is likely to be an available port                        */
-/* INTERVAL: Milliseconds between subsequent simulated hardware packets     */
-/*           2000 means that packets will be sent every 2 seconds           */
-/* CSS:      HTML link to a CSS file that makes the table look pretty       */
-/*           The default is a CSS file hosted on reelyactive.com            */
+/* HOST:      IP address on which to host the webpage and receive packets   */
+/*            127.0.0.1 means you can visit the webpage at http://localhost */
+/* HTTP_PORT: Port on which to host the webpage                             */
+/*            3000 is safe. 80, the standard HTTP port but might be blocked */
+/* UDP_PORT:  Port on which to send/receive packets                         */
+/*            50000 is likely to be an available port                       */
+/* INTERVAL:  Milliseconds between subsequent simulated hardware packets    */
+/*            2000 means that packets will be sent every 2 seconds          */
+/* CSS:       HTML link to a CSS file that makes the table look pretty      */
+/*            The default is a CSS file hosted on reelyactive.com           */
 /* STALE_MILLISECONDS: don't store historic tiraids longer than this        */
 /****************************************************************************/
 var HOST = '127.0.0.1';
-var PORT = 50000;
+var HTTP_PORT = 3000;
+var UDP_PORT = 50000;
 var INTERVAL = 2000;
 var CSS = '<link rel="stylesheet" type="text/css" href="http://reelyactive.com/style/barnowl-test.css">';
 var STALE_MILLISECONDS = 60000;
@@ -31,7 +34,7 @@ var transformIdentifier = {'tag':'td','html':'${identifier.value}'};
 var transformTime = {'tag':'td','html':'${timestamp}'};
 var transformRSSI = {'tag':'td','html':'${rssi}'};
 var transformStrongest = {'tag':'td','html':'${identifier.value}'};
-var barnOwlInstance = new barnOwl();
+var barnOwlInstance = new barnOwl({});
 var db = new nedb();
 var server = http.createServer();
 var socket = dgram.createSocket('udp4');
@@ -43,7 +46,7 @@ socket.bind();
  */
 function sendPacket() {
   var simulatedPacket = new Buffer('f001ed4a11aaaa7800008000000000000000000000000000000000503300aaaa0401b00b1e500000aaaa7801008100000000000000000000000000000000503300aaaa1801421655daba50e1fe0201050c097265656c794163746976650100', 'hex');
-  socket.send(simulatedPacket, 0, simulatedPacket.length, PORT, HOST);
+  socket.send(simulatedPacket, 0, simulatedPacket.length, UDP_PORT, HOST);
 }
 
 setInterval(sendPacket, INTERVAL);
@@ -60,7 +63,7 @@ barnOwlInstance.on('visibilityEvent', function(tiraid) {
   console.log(prettyTiraid); 
 }); 
 
-barnOwlInstance.bind('udp', HOST + ':' + PORT);
+barnOwlInstance.bind( { protocol: 'udp', path: HOST + ':' + UDP_PORT } );
 
 
 /**
@@ -86,7 +89,7 @@ server.on('request', function(req, res) {
   });
 });
 
-server.listen(80);
+server.listen(HTTP_PORT);
 
 
 /****************************************************************************/
@@ -97,6 +100,6 @@ server.listen(80);
 /* SERIAL: Specify the path to the serial device on THIS machine which is   */
 /*         receiving packets. ex: /dev/ttyUSB0 (typical on Linux)           */
 /****************************************************************************/
-//barnOwlInstance.bind('udp', '192.168.1.101:50000');
-//barnOwlInstance.bind('serial', '/dev/ttyUSB0');
+//barnOwlInstance.bind( { protocol: 'udp', path: '192.168.1.101:50000' } );
+//barnOwlInstance.bind( { protocol: 'serial', path: '/dev/ttyUSB0' } );
 /****************************************************************************/
